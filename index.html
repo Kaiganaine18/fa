@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Father's Day, Dad</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a3557;
+    --navy-light: #234a7a;
+    --gold: #c8952a;
+    --gold-light: #e8b84b;
+    --gold-pale: #fdf3e0;
+    --cream: #fdfaf5;
+    --white: #ffffff;
+    --text-dark: #1a2030;
+    --text-mid: #4a5568;
+    --text-light: #7a8595;
+    --border: rgba(200, 149, 42, 0.2);
+    --shadow: 0 4px 24px rgba(26,53,87,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,53,87,0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--gold-light); background: rgba(255,255,255,0.08); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 60%, #2a5a8a 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #home::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,149,42,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(200,149,42,0.5);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.45rem 1.2rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title span { color: var(--gold-light); }
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+
+  /* Photo upload area */
+  .photo-frame {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: rgba(255,255,255,0.08);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    margin: 0 auto 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-frame:hover { border-color: var(--gold-light); background: rgba(255,255,255,0.12); }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: none; border-radius: 50%; }
+  .photo-frame-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .photo-frame-placeholder svg { width: 40px; height: 40px; stroke: rgba(200,149,42,0.7); fill: none; }
+  .photo-frame-placeholder span { font-size: 0.78rem; color: rgba(200,149,42,0.8); text-align: center; }
+  #photoInput { display: none; }
+
+  .hero-date {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Gold divider */
+  .divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 3rem auto; max-width: 400px;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-icon { color: var(--gold); font-size: 1.2rem; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+
+  /* LETTER */
+  #letter { background: var(--white); }
+  .letter-card {
+    background: var(--gold-pale);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    position: relative;
+  }
+  .letter-card::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: var(--gold-light);
+    opacity: 0.25;
+    position: absolute;
+    top: -1.5rem; left: 1.5rem;
+    line-height: 1;
+  }
+  .letter-body {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-mid);
+    margin-bottom: 1.5rem;
+  }
+  .letter-body p { margin-bottom: 1.2rem; }
+  .letter-sign {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    font-style: italic;
+  }
+
+  /* GALLERY */
+  #gallery { background: var(--cream); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .gallery-item {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px dashed var(--border);
+    background: var(--white);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+  }
+  .gallery-item:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .gallery-item .placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; text-align: center; }
+  .gallery-item .placeholder svg { width: 28px; height: 28px; stroke: var(--gold); opacity: 0.6; fill: none; }
+  .gallery-item .placeholder span { font-size: 0.75rem; color: var(--text-light); }
+  .gallery-item .caption-input {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(26,53,87,0.85);
+    color: white; border: none; outline: none;
+    font-size: 0.78rem; padding: 0.5rem;
+    text-align: center; font-family: 'Inter', sans-serif;
+    display: none;
+  }
+  .gallery-item .caption-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(26,53,87,0.75);
+    color: white; font-size: 0.75rem; padding: 0.4rem;
+    text-align: center; display: none;
+  }
+  .add-photo-btn {
+    border: 2px dashed rgba(200,149,42,0.4);
+    background: transparent;
+    border-radius: 12px;
+    aspect-ratio: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+  }
+  .add-photo-btn:hover { background: var(--gold-pale); border-color: var(--gold); }
+  .add-photo-btn svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; }
+
+  /* TIMELINE */
+  #timeline { background: var(--white); }
+  .timeline { position: relative; padding: 1.5rem 0; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 24px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), rgba(200,149,42,0.1));
+  }
+  .timeline-item {
+    display: flex; gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-left: 0;
+    position: relative;
+  }
+  .timeline-dot {
+    flex-shrink: 0;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    color: var(--gold-light);
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+    z-index: 1;
+  }
+  .timeline-content {
+    background: var(--gold-pale);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+  }
+  .timeline-year {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-event {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  .timeline-edit {
+    display: none;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none; border: none; font-family: inherit;
+  }
+  .timeline-item:hover .timeline-edit { display: inline; }
+
+  /* LOVE REASONS */
+  #love { background: var(--navy); }
+  #love .section-title { color: var(--white); }
+  #love .section-title em { color: var(--gold-light); }
+  #love .section-eyebrow { color: var(--gold-light); }
+  .love-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .love-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(200,149,42,0.2);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.25s;
+  }
+  .love-card:hover { background: rgba(255,255,255,0.10); border-color: rgba(200,149,42,0.4); }
+  .love-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--gold-light);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .love-text {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.65;
+  }
+  .love-who {
+    font-size: 0.75rem;
+    color: rgba(200,149,42,0.7);
+    margin-top: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* GUESTBOOK */
+  #guestbook { background: var(--cream); }
+  .guestbook-form {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-mid);
+    letter-spacing: 0.04em;
+  }
+  .form-input, .form-textarea {
+    border: 1.5px solid rgba(200,149,42,0.25);
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-full { grid-column: 1 / -1; }
+  .submit-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+  /* messages */
+  .messages-list { display: flex; flex-direction: column; gap: 1rem; }
+  .message-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 1.25rem 1.5rem;
+  }
+  .message-name {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
+  }
+  .message-relation {
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    font-weight: 500;
+  }
+  .message-text { font-size: 0.92rem; color: var(--text-mid); line-height: 1.65; }
+  .message-date { font-size: 0.72rem; color: var(--text-light); margin-top: 0.6rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+  }
+  footer span { color: var(--gold-light); }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.25rem; }
+    .letter-card { padding: 2rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .timeline::before { left: 18px; }
+    .timeline-dot { width: 38px; height: 38px; font-size: 0.62rem; }
+  }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+
+  /* Confetti canvas */
+  #confetti-canvas {
+    position: fixed; top: 0; left: 0; pointer-events: none;
+    z-index: 9999; width: 100%; height: 100%;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">❤ Dad's Day</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#letter">Letter</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#love">Why We Love You</a></li>
+    <li><a href="#guestbook">Guestbook</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-badge fade-up">Father's Day · June 2025</div>
+
+  <label class="photo-frame fade-up delay-1" for="photoInput" title="Click to add a photo of Dad">
+    <img id="heroPhoto" src="" alt="Dad's photo">
+    <div class="photo-frame-placeholder" id="heroPH">
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span>Tap to add<br>Dad's photo</span>
+    </div>
+  </label>
+  <input type="file" id="photoInput" accept="image/*">
+
+  <h1 class="hero-title fade-up delay-1">Happy <span>Father's</span> Day</h1>
+  <p class="hero-subtitle fade-up delay-2">To the man who made everything possible</p>
+  <p class="hero-date fade-up delay-3">With all our love, always</p>
+</section>
+
+<!-- LETTER -->
+<section id="letter">
+  <div class="container">
+    <p class="section-eyebrow">A personal tribute</p>
+    <h2 class="section-title">Dear <em>Dad</em></h2>
+    <div class="letter-card">
+      <div class="letter-body" id="letterBody" contenteditable="true" spellcheck="true">
+        <p>Where do we even begin? You are the steady hand that guided us through every storm, the warm voice that calmed every fear, and the example we have tried — however imperfectly — to follow in everything we do.</p>
+        <p>We remember the early mornings you rose before the rest of us, the evenings you stayed up to make sure we got home safe, and every ordinary Tuesday in between that you showed up as our hero without ever asking for recognition.</p>
+        <p>You taught us that love is not just something you say — it is something you do, day after day, without keeping score. We have watched you work hard, laugh generously, forgive quickly, and love deeply, and we are so proud to call you ours.</p>
+        <p>On this special day, we want you to know: you are seen, you are celebrated, and you are loved beyond anything these words can hold.</p>
+      </div>
+      <p class="letter-sign">With all our hearts, Your Family ♥</p>
+    </div>
+    <p style="font-size:0.78rem; color: var(--text-light); margin-top: 0.75rem; text-align:right;">
+      ✏️ Click the letter above to personalise it
+    </p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <p class="section-eyebrow">Memories we treasure</p>
+    <h2 class="section-title">Our Family <em>Gallery</em></h2>
+    <p style="color: var(--text-mid); font-size:0.9rem;">Click any frame to upload a photo, then add a caption.</p>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- slots filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <p class="section-eyebrow">A life well lived</p>
+    <h2 class="section-title">His Life <em>Highlights</em></h2>
+    <p style="color: var(--text-mid); font-size:0.9rem; margin-bottom:2rem;">Hover a milestone to edit it.</p>
+    <div class="timeline" id="timelineEl">
+      <!-- filled by JS -->
+    </div>
+    <button onclick="addTimelineItem()" style="background:var(--gold-pale); border:1px solid var(--border); border-radius:8px; padding:0.6rem 1.4rem; font-family:'Inter',sans-serif; font-size:0.82rem; color:var(--gold); font-weight:600; cursor:pointer;">+ Add a milestone</button>
+  </div>
+</section>
+
+<!-- WHY WE LOVE YOU -->
+<section id="love">
+  <div class="container">
+    <p class="section-eyebrow">Straight from our hearts</p>
+    <h2 class="section-title">Why We <em>Love You</em></h2>
+    <div class="love-grid" id="loveGrid">
+      <!-- filled by JS -->
+    </div>
+    <div style="margin-top:1.5rem; display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+      <input id="loveInput" class="form-input" placeholder="Add a reason we love Dad..." style="flex:1; min-width:200px; background:rgba(255,255,255,0.1); border-color:rgba(200,149,42,0.3); color:white;">
+      <input id="loveWho" class="form-input" placeholder="From..." style="width:140px; background:rgba(255,255,255,0.1); border-color:rgba(200,149,42,0.3); color:white;">
+      <button onclick="addLoveReason()" style="background:var(--gold); border:none; border-radius:8px; padding:0.65rem 1.4rem; color:var(--navy); font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; white-space:nowrap;">Add ♥</button>
+    </div>
+  </div>
+</section>
+
+<!-- GUESTBOOK -->
+<section id="guestbook">
+  <div class="container">
+    <p class="section-eyebrow">Leave your love</p>
+    <h2 class="section-title">Family <em>Guestbook</em></h2>
+    <div class="guestbook-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="gName">Your name</label>
+          <input class="form-input" id="gName" placeholder="e.g. Sarah">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="gRelation">Relationship to Dad</label>
+          <input class="form-input" id="gRelation" placeholder="e.g. Daughter, Friend…">
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label" for="gMsg">Your message</label>
+          <textarea class="form-textarea" id="gMsg" placeholder="Write your heartfelt message for Dad…"></textarea>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="submitMessage()">Leave my message ♥</button>
+    </div>
+    <div class="messages-list" id="messagesList"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Made with ♥ for the world's greatest dad · 
+  <span>Happy Father's Day</span> · 
+  June 2025
+</footer>
+
+<script>
+/* ── Photo upload (hero) ── */
+const photoInput = document.getElementById('photoInput');
+const heroPhoto = document.getElementById('heroPhoto');
+const heroPH = document.getElementById('heroPH');
+photoInput.addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => { heroPhoto.src = ev.target.result; heroPhoto.style.display='block'; heroPH.style.display='none'; };
+  r.readAsDataURL(f);
+});
+
+/* ── Gallery ── */
+const gallerySlots = [
+  'First birthday', 'A favourite holiday', 'Dad at work', 'Family Sunday',
+  'A funny moment', 'Dad & the kids', 'His greatest smile', 'A proud day'
+];
+const galleryGrid = document.getElementById('galleryGrid');
+
+gallerySlots.forEach((label, i) => {
+  const item = document.createElement('div');
+  item.className = 'gallery-item';
+  item.dataset.index = i;
+  item.innerHTML = `
+    <img id="gimg${i}" src="" alt="">
+    <div class="placeholder" id="gph${i}">
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>${label}</span>
+    </div>
+    <div class="caption-label" id="gcl${i}"></div>
+    <input class="caption-input" id="gci${i}" placeholder="Add caption…" maxlength="40">
+  `;
+  item.addEventListener('click', e => {
+    if (e.target.tagName === 'INPUT') return;
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*';
+    inp.onchange = ev => {
+      const f = ev.target.files[0]; if (!f) return;
+      const r = new FileReader();
+      r.onload = ev2 => {
+        document.getElementById('gimg'+i).src = ev2.target.result;
+        document.getElementById('gimg'+i).style.display = 'block';
+        document.getElementById('gph'+i).style.display = 'none';
+        const ci = document.getElementById('gci'+i);
+        const cl = document.getElementById('gcl'+i);
+        ci.style.display = 'block'; cl.style.display = 'block';
+        ci.onchange = () => { cl.textContent = ci.value; };
+      };
+      r.readAsDataURL(f);
+    };
+    inp.click();
+  });
+  galleryGrid.appendChild(item);
+});
+
+/* ── Timeline ── */
+const events = [
+  { year: 'Birth', event: 'He came into the world', desc: 'And the world became a much better place from that day forward.' },
+  { year: '1st job', event: 'Began his career', desc: 'With hard work, dedication, and his trademark quiet determination.' },
+  { year: 'Wedding', event: 'Found his life partner', desc: 'The day our family story truly began — one of the happiest days of our lives.' },
+  { year: 'Our birth', event: 'Became a father', desc: 'He took on the greatest role of his life with grace, love, and a smile.' },
+  { year: 'Today', event: 'Still our hero', desc: 'Every day he continues to inspire us with his strength and his heart.' },
+];
+const timelineEl = document.getElementById('timelineEl');
+function renderTimeline() {
+  timelineEl.innerHTML = '';
+  events.forEach((ev, i) => {
+    const d = document.createElement('div');
+    d.className = 'timeline-item';
+    d.innerHTML = `
+      <div class="timeline-dot">${ev.year}</div>
+      <div class="timeline-content">
+        <div class="timeline-year">${ev.year}</div>
+        <div class="timeline-event" contenteditable="true">${ev.event}</div>
+        <div class="timeline-desc" contenteditable="true">${ev.desc}</div>
+        <button class="timeline-edit" onclick="removeTimeline(${i})">Remove</button>
+      </div>
+    `;
+    timelineEl.appendChild(d);
+  });
+}
+function removeTimeline(i) { events.splice(i,1); renderTimeline(); }
+function addTimelineItem() {
+  const yr = prompt('Year or label (e.g. 1990 or "Graduation"):','');
+  if (!yr) return;
+  const ev = prompt('What happened?','');
+  if (!ev) return;
+  const desc = prompt('A little more detail:','');
+  events.push({ year: yr, event: ev, desc: desc || '' });
+  renderTimeline();
+}
+renderTimeline();
+
+/* ── Love reasons ── */
+const loveReasons = [
+  { text: 'You always know how to make us laugh — even on our worst days.', who: 'Your kids' },
+  { text: 'Your hugs feel like home, no matter where we are in the world.', who: 'The family' },
+  { text: 'You never once gave up on us, even when we gave you every reason to.', who: 'With gratitude' },
+  { text: 'You work so hard without ever complaining — we see it and we are in awe.', who: 'Always watching' },
+  { text: 'Your advice has guided us through every big decision in life.', who: 'Your biggest fans' },
+  { text: 'You make every ordinary moment feel special just by being in it.', who: 'The whole family' },
+];
+const loveGrid = document.getElementById('loveGrid');
+function renderLove() {
+  loveGrid.innerHTML = '';
+  loveReasons.forEach((r, i) => {
+    const c = document.createElement('div');
+    c.className = 'love-card';
+    c.innerHTML = `<div class="love-number">0${i+1}</div><div class="love-text">"${r.text}"</div><div class="love-who">— ${r.who}</div>`;
+    loveGrid.appendChild(c);
+  });
+}
+function addLoveReason() {
+  const t = document.getElementById('loveInput').value.trim();
+  const w = document.getElementById('loveWho').value.trim() || 'Anonymous';
+  if (!t) return;
+  loveReasons.push({ text: t, who: w });
+  renderLove();
+  document.getElementById('loveInput').value = '';
+  document.getElementById('loveWho').value = '';
+}
+renderLove();
+
+/* ── Guestbook ── */
+const sampleMessages = [
+  { name: 'Mum', relation: 'Wife', text: 'You are my best friend, my partner in everything, and the most wonderful father I could have wished for our children. I love you more each day.', date: 'Today' },
+  { name: 'The kids', relation: 'Your children', text: 'We searched for the words but none are big enough. Thank you for being our dad. You are everything.', date: 'Today' },
+];
+const messagesList = document.getElementById('messagesList');
+function renderMessages() {
+  messagesList.innerHTML = '';
+  sampleMessages.forEach(m => {
+    const c = document.createElement('div');
+    c.className = 'message-card';
+    c.innerHTML = `<div class="message-name">${m.name}</div><div class="message-relation">${m.relation}</div><div class="message-text">${m.text}</div><div class="message-date">${m.date}</div>`;
+    messagesList.appendChild(c);
+  });
+}
+function submitMessage() {
+  const name = document.getElementById('gName').value.trim();
+  const rel = document.getElementById('gRelation').value.trim();
+  const msg = document.getElementById('gMsg').value.trim();
+  if (!name || !msg) { alert('Please add your name and a message.'); return; }
+  sampleMessages.push({ name, relation: rel || 'Family friend', text: msg, date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) });
+  renderMessages();
+  document.getElementById('gName').value = '';
+  document.getElementById('gRelation').value = '';
+  document.getElementById('gMsg').value = '';
+  document.getElementById('messagesList').scrollIntoView({ behavior:'smooth' });
+}
+renderMessages();
+
+/* ── Confetti burst on load ── */
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+const pieces = [];
+const colors = ['#c8952a','#e8b84b','#1a3557','#234a7a','#ffffff','#fdf3e0'];
+for (let i = 0; i < 80; i++) {
+  pieces.push({
+    x: Math.random()*canvas.width, y: -10 - Math.random()*200,
+    w: 6+Math.random()*8, h: 3+Math.random()*5,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*360, vx: -1.5+Math.random()*3, vy: 2+Math.random()*3,
+    vr: (-1+Math.random()*2)*2, alpha:1
+  });
+}
+let frame = 0;
+function drawConfetti() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  frame++;
+  pieces.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+    if (frame > 80) p.alpha = Math.max(0, p.alpha - 0.008);
+    ctx.save(); ctx.globalAlpha = p.alpha;
+    ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+    ctx.fillStyle = p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+    ctx.restore();
+  });
+  if (pieces.some(p => p.alpha > 0)) requestAnimationFrame(drawConfetti);
+  else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+}
+setTimeout(drawConfetti, 300);
+</script>
+</body>
+</html>
